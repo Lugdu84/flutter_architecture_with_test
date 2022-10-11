@@ -1,4 +1,4 @@
-import 'package:flutter_architecture/ui/screen/login_screen.dart';
+import 'package:flutter_architecture/view/login_screen.dart';
 
 class LoginViewModel extends ILoginViewModel {
   bool _isLoading = false;
@@ -48,6 +48,10 @@ class LoginViewModel extends ILoginViewModel {
       }
       if (password.isEmpty) {
         _passwordErrorMessage = "Le mot de passe est obligatoire";
+        notifyListeners();
+      } else if (password.isNotEmpty && password.length < 7) {
+        _passwordErrorMessage =
+            "Le mot de passe doit comporter au moins 6 caractères";
         notifyListeners();
       }
       if (_minimalInputValid) {
