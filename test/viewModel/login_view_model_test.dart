@@ -31,18 +31,14 @@ main() {
     loginVM.loginUser();
     expect(loginVM.passwordErrorMessage,
         LoginViewModel.errorPassworMustNotBeEmpty);
-    loginVM.emailChanged("test");
     loginVM.passwordChanged("e");
     loginVM.loginUser();
     expect(
         loginVM.passwordErrorMessage, LoginViewModel.errorMinCaracInPassword);
-    loginVM.emailChanged("aze");
     loginVM.passwordChanged("azerty");
     loginVM.loginUser();
-
     expect(
         loginVM.passwordErrorMessage, LoginViewModel.errorMinCaracInPassword);
-    loginVM.emailChanged("test");
     loginVM.passwordChanged("azertys");
     loginVM.loginUser();
     expect(loginVM.passwordErrorMessage, null);
