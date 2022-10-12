@@ -15,10 +15,10 @@ main() {
     loginVM.passwordChanged("test");
     loginVM.emailChanged("test");
     loginVM.loginUser();
-    expect(loginVM.emailErrorMessage, "Email invalide");
+    expect(loginVM.emailErrorMessage, LoginViewModel.emailNotValid);
     loginVM.emailChanged("");
     loginVM.loginUser();
-    expect(loginVM.emailErrorMessage, "Email invalide");
+    expect(loginVM.emailErrorMessage, LoginViewModel.emailNotValid);
     loginVM.emailChanged("sheldon@co.io");
     loginVM.loginUser();
     expect(loginVM.emailErrorMessage, null);
@@ -29,17 +29,19 @@ main() {
     loginVM.emailChanged("test");
     loginVM.passwordChanged("");
     loginVM.loginUser();
-    expect(loginVM.passwordErrorMessage, "Le mot de passe est obligatoire");
+    expect(loginVM.passwordErrorMessage,
+        LoginViewModel.errorPassworMustNotBeEmpty);
     loginVM.emailChanged("test");
     loginVM.passwordChanged("e");
     loginVM.loginUser();
-    expect(loginVM.passwordErrorMessage,
-        "Le mot de passe doit comporter au moins 6 caractères");
+    expect(
+        loginVM.passwordErrorMessage, LoginViewModel.errorMinCaracInPassword);
     loginVM.emailChanged("aze");
     loginVM.passwordChanged("azerty");
     loginVM.loginUser();
-    expect(loginVM.passwordErrorMessage,
-        "Le mot de passe doit comporter au moins 6 caractères");
+
+    expect(
+        loginVM.passwordErrorMessage, LoginViewModel.errorMinCaracInPassword);
     loginVM.emailChanged("test");
     loginVM.passwordChanged("azertys");
     loginVM.loginUser();

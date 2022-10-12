@@ -18,6 +18,11 @@ class LoginViewModel extends ILoginViewModel {
   @override
   String? get errorMessage => _errorMessage;
 
+  static const errorMinCaracInPassword =
+      "Le mot de passe doit comporter au moins 6 caractères";
+  static const errorPassworMustNotBeEmpty = "Le mot de passe est obligatoire";
+  static const emailNotValid = "Email invalide";
+
   bool get _minimalInputValid =>
       _email != null &&
       _password != null &&
@@ -43,15 +48,14 @@ class LoginViewModel extends ILoginViewModel {
 
     if (email != null && password != null) {
       if (!email.contains("@")) {
-        _emailErrorMessage = "Email invalide";
+        _emailErrorMessage = LoginViewModel.emailNotValid;
         notifyListeners();
       }
       if (password.isEmpty) {
-        _passwordErrorMessage = "Le mot de passe est obligatoire";
+        _passwordErrorMessage = LoginViewModel.errorPassworMustNotBeEmpty;
         notifyListeners();
       } else if (password.isNotEmpty && password.length < 7) {
-        _passwordErrorMessage =
-            "Le mot de passe doit comporter au moins 6 caractères";
+        _passwordErrorMessage = LoginViewModel.errorMinCaracInPassword;
         notifyListeners();
       }
       if (_minimalInputValid) {
@@ -60,7 +64,7 @@ class LoginViewModel extends ILoginViewModel {
         await Future.delayed(const Duration(seconds: 2));
         _isLoading = false;
 
-        _errorMessage = password == "ok"
+        _errorMessage = password == "azertys"
             ? "Bienvenue $email"
             : "Impossible de retrouver votre compte";
         notifyListeners();
